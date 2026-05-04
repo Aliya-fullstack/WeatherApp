@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Info</title>
+    <style>
+       *, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Georgia, serif;
+  background-color: #f5ede0;
+  min-height: 100vh;
+}
+
+/* ── Heading ── */
+h1 {
+  text-align: center;
+  color: #584738;
+  font-family: Pristina, cursive;
+  font-size: clamp(28px, 5vw, 50px);
+  padding: 1rem;
+}
+
+h1 span {
+  color: #fff;
+  font-family: 'Stencil Std', serif;
+  font-size: clamp(24px, 4.5vw, 40px);
+}
+
+/* ── Outer frame ── */
+.cover {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #B59E7D;
+  border: clamp(10px, 3vw, 40px) solid #584738;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 5vw, 60px);
+}
+
+/* ── Inner dark panel ── */
+.cover2 {
+  width: 100%;
+  max-width: 900px;
+  min-height: 400px;
+  background-color: #584738;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vw, 50px);
+}
+
+/* ── Card ── */
+.background {
+  width: 100%;
+  max-width: 420px;
+  background-color: #B59E7D;
+  border-radius: 8px;
+  padding: clamp(16px, 4vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── City label ── */
+.cityy {
+  color: #584738;
+  font-size: 20px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 14px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+/* ── Input ── */
+.weatherr {
+  width: 100%;
+  height: 38px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  outline: none;
+  padding: 0 10px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.weatherr::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.weatherr:focus {
+  border-color: #584738;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Button ── */
+.btn {
+  width: 100%;
+  padding: 10px 20px;
+  background: #584738;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: clamp(13px, 2vw, 15px);
+  font-family: inherit;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover {
+  background: transparent;
+  color: #584738;
+  border-color: #584738;
+}
+
+/* ── Result / description ── */
+.strong3 {
+  color: #fff;
+  font-size: clamp(14px, 2.5vw, 18px);
+  line-height: 1.5;
+}
+
+/* ── Temperature display ── */
+.strong1 {
+  font-size: clamp(32px, 7vw, 50px);
+  color: #584738;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.strong2 {
+  font-size: clamp(18px, 4vw, 28px);
+  color: #584738;
+  font-weight: 500;
+  align-self: flex-end;
+  padding-bottom: 6px;
+}
+
+/* ── Stat grid ── */
+.weather-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.weather-meta-item {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.meta-value {
+  font-size: clamp(14px, 2.5vw, 16px);
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ── Divider ── */
+.weather-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .cover {
+    padding: 20px;
+    border-width: 16px;
+  }
+
+  .cover2 {
+    padding: 24px 16px;
+  }
+
+  .background {
+    max-width: 100%;
+  }
+
+  .weather-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .cover {
+    border-width: 10px;
+    padding: 12px;
+    min-height: 100dvh;
+  }
+
+  .cover2 {
+    padding: 16px 12px;
+    border-radius: 6px;
+  }
+
+  .background {
+    padding: 16px;
+    border-radius: 6px;
+    gap: 10px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h1 span {
+    font-size: 22px;
+  }
+
+  .strong1 {
+    font-size: 36px;
+  }
+
+  .strong2 {
+    font-size: 20px;
+  }
+
+  .weather-meta {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .weather-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .cover {
+    border-width: 6px;
+  }
+}
+    </style>
+</head>
+
+<body>
+    <div class="cover">
+<div class="cover2">
+        <div class="background">
+            <h1>Weather <span>App</span></h1>
+
+            <form onsubmit="return false;">
+                <label class="cityy">Country/City:</label>
+                <input type="text" id="weather" class="weatherr"><br><br>
+                <button onclick="onmovieclick()" class="btn">Get Weather</button>
+                <p id="result"></p>
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        async function onmovieclick() {
+            let city = document.getElementById('weather').value.trim();
+
+            if (!city) {
+                document.getElementById('result').innerText = "Please enter a city name.";
+                return;
+            }
+
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=96d8bb8dbdaf6e3635aa6093bc6c5507&units=metric`;
+
+            try {
+                let response = await fetch(url);
+                let data = await response.json();
+
+                if (data.cod === 200) {
+                    document.getElementById('result').innerHTML = `
+                <strong class="strong1">${data.name}</strong><br>
+                <strong class="strong2">${data.main.temp} °C</strong><br>
+                <strong class="strong3">Weather: ${data.weather[0].description}</strong><br>
+                <strong class="strong3">Humidity: ${data.main.humidity}%</strong><br>
+                <strong class="strong3">Wind Speed: ${data.wind.speed} m/s</strong>
+            `;
+                } else {
+                    document.getElementById('result').innerText = "City not found!";
+                }
+            } catch (error) {
+                document.getElementById('result').innerText = "Error fetching weather data.";
+            }
+        }
+
+    </script>
+</body>
+
+</html>
